@@ -29,7 +29,7 @@
 		As later sections suggest, the amount of features it takes to determine the class for each task is very low. This is hypothesized based on input analysis and later machine learning observations support these hypotheses. 
 
 	\section{Cleaning Data and Feature Extraction}
-		As the very first step input data were split into training and testing data. The analysis were first done on the training sets. 
+		As the very first step input data were split into training and testing data with 70-to-30 ratio. The analysis were first done on the training set. 
 	\section{Data Analysis and Visualization}
 
 		To visualize training data X it was plotted with provided wavelength data that contains information about each feature wave length. Additionally, Y training set was used to indicate visually how colours are distributed and can be distinguished. This gave insights as to which features are likely to be good indicators for predicting the colour. Plots for both binary and multi-class data were generated. 
@@ -45,11 +45,15 @@
 
 		\subsection{Multi-Class Classification}
 
-		\begin{figure}[H]
-			\includegraphics[width=1\textwidth]{png/multi_default}
-			\caption{}
-			\label{fig:milti}
-		\end{figure}
+			Similarly, fig.\ref{fig:multi} shows different colour reflectance intensities for five different colours. Similar observation can be seen here too. However, due to larger number of colour classes some seem to overlap slightly. 
+
+			From fig.\ref{fig:miltu} it can be seen that red and pink colour intensities over different wavelengths are very similar. Green and blue are also similar. Yellow on the other hand is very distinct. 
+
+			\begin{figure}[H]
+				\includegraphics[width=1\textwidth]{png/multi_default}
+				\caption{Input feature visualization for multi-class task. Five colour predicting features are indicated by corresponding colour.}
+				\label{fig:multi}
+			\end{figure}
 
 	\section{Preparing Inputs and Choosing Features}
 	\section{Selecting and Training Classification Models}
