@@ -24,14 +24,16 @@
 	\maketitle
 
 	\section{Overview}
-		The objectives of this practical were to come up with classification model for binary and multi-class classification problems. This submission investigates both binary and multi-class tasks. The solution python scripts can be found in \textit{/binaryML/} and \textit{/multiclassML/} directories. 
+		The objectives of this practical were to come up with classification model for binary and multi-class classification problems. This submission investigates both binary and multi-class tasks. The solution python scripts can be found in \textit{/binaryML/} and \textit{/multiclassML/} directories. Corresponding predicted class files are also in these directories.
 
 		As later sections suggest, the amount of features it takes to determine the class for each task is very low. This is hypothesized based on input analysis and later machine learning observations support these hypotheses. 
 
 	\section{Cleaning Data and Feature Extraction}
 		As the very first step input data were split into training and testing data with 70-to-30 ratio. The analysis were first done on the training set. 
-	\section{Data Analysis and Visualization}
 
+		(negative values)
+
+	\section{Data Analysis and Visualization}
 		To visualize training data X it was plotted with provided wavelength data that contains information about each feature wave length. Additionally, Y training set was used to indicate visually how colours are distributed and can be distinguished. This gave insights as to which features are likely to be good indicators for predicting the colour. Plots for both binary and multi-class data were generated. 
 
 		\subsection{Binary Classification}
@@ -47,7 +49,7 @@
 
 			Similarly, fig.\ref{fig:multi} shows different colour reflectance intensities for five different colours. Similar observation can be seen here too. However, due to larger number of colour classes some seem to overlap slightly. 
 
-			From fig.\ref{fig:miltu} it can be seen that red and pink colour intensities over different wavelengths are very similar. Green and blue are also similar. Yellow on the other hand is very distinct. 
+			From fig.\ref{fig:miltu} it can be seen that red and pink colour intensities over different wavelengths are very similar. Green and blue are also similar. Yellow on the other hand is very distinct. Just from looking at the graph it can be seen that there are not many features that 
 
 			\begin{figure}[H]
 				\includegraphics[width=1\textwidth]{png/multi_default}
