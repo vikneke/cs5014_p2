@@ -5,12 +5,18 @@
 \usepackage{cleveref}
 \usepackage[export]{adjustbox}
 \usepackage{mathabx}
-\usepackage{subfig}	
+\usepackage{graphicx}
+\usepackage{subfigure}
 \usepackage{url}						
 \renewcommand{\baselinestretch}{1}
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 \usepackage{float}
 \usepackage[font=scriptsize]{caption}
+% \usepackage{subfigure}
+\usepackage[T1]{fontenc}
+\usepackage[font=small,labelfont=bf,tableposition=top]{caption}
+\DeclareCaptionLabelFormat{andtable}{#1~#2  \&  \tablename~\thetable}
+
 
 \title{CS5014 - Machine Learning 
 \\ \vspace{5mm} \Large P2 - Classification of object colour 
@@ -28,24 +34,47 @@
 
 		As later sections suggest, the amount of features it takes to determine the class for each task is very low. This is hypothesized based on input analysis and later machine learning observations support these hypotheses. 
 
-	\section{Cleaning Data and Feature Extraction}
-		As the very first step input data were split into training and testing data with 70-to-30 ratio. The analysis were first done on the training set. 
+	\section{Binary Classification Task}
 
-		(negative values)
+	\subsection{Cleaning Data and Feature Extraction}
+		As the very first step input data were split into training and testing data with 70-to-30 ratio. The analysis were first done on the training set. Sklearn's \textit{train\_test\_split} was used to do so. Also, a seed was used to ensure the same samples are used every time python notebook is fully executed.
 
-	\section{Data Analysis and Visualization}
-		To visualize training data X it was plotted with provided wavelength data that contains information about each feature wave length. Additionally, Y training set was used to indicate visually how colours are distributed and can be distinguished. This gave insights as to which features are likely to be good indicators for predicting the colour. Plots for both binary and multi-class data were generated. 
+		From observations and further analysis in python, data cleaning was not necessary. Data contains negative and positive values that according to the practical specification make sense. 
 
-		\subsection{Binary Classification}
-			Fig.\ref{fig:binary} shows that there is a clear distinction between red and green colours in terms of features. From the same figure it can be said feature values between 400 and 500 wavelength are more or less shared between both red and green colours. Around 600 wavelength both colour features overlap. Similarly, towards the final features similar observations can be made. The graph insights suggest that overlapping features are not great for determining the class because a feature value can be shared by both colours therefore reducing possibility of determining the right colour. However, a single feature that is around 520 or 640 should be good enough to determine the class. From fig.\ref{fig:binary} it is clear that those wavelength values are distinct to each colour.
+		However, a functionality to remove all records with null values in was implemented to ensure that the samples are fully prepared.
 
-			\begin{figure}[H]
-				\includegraphics[width=1\textwidth]{png/binary_default}
-				\caption{Input feature visualization for binary classification task. Red and green predicting features are indicated by colour.}
-				\label{fig:binary}
-			\end{figure}
+	\subsection{Data Analysis and Visualization}
+		To visualize training data X it was plotted with provided wavelength data that contains information about each feature wave length. Additionally, Y training set was used to indicate visually how colours are distributed and can be distinguished. This gave insights as to which features are likely to be good indicators for predicting the colour. 
 
-		\subsection{Multi-Class Classification}
+		\begin{figure}[H]
+			\includegraphics[width=1\textwidth]{png/binary_default}
+			\caption{Input feature visualization for binary classification task. Red and green predicting features are indicated by colour.}
+			\label{fig:binary}
+		\end{figure}
+
+		Fig.\ref{fig:binary} shows that there is a clear distinction between red and green colours in terms of features. From the same figure it can be said that feature values between 420 and 450 wavelengths are more or less shared between both, red and green colours. Around 600 wavelength both colour features overlap. Similarly, towards the final features similar observations can be made. The graph insights suggest that overlapping features are not great for determining the class because a feature value can be shared by both colours therefore reducing possibility of determining the right colour. However, a single feature that is around 530 or 650 should be good enough to determine the class. From fig.\ref{fig:binary} it is clear that intensity at those wavelengths are distinct to each colour.
+
+		The hypothesis therefore is that any feature that distinguishes the two colours at particular wavelength will be good enough to determine the class. According to the fig.\ref{fig:binary} there are many of these features: at wavelengths 500-to-580 and 610-to-720. Therefore, it one feature should be enough to determine the class. 
+
+	\subsection{Preparing Inputs and Choosing Features}
+		To choose an appropriate feature an experiment was conducted. Since a single feature could possibly determine a class a training set was 
+
+
+		\begin{figure}[H]
+			\includegraphics[width=1\textwidth]{png/binary_one}
+			\caption{One feature accuracy scores for binary classification.}
+			\label{fig:binary_one}
+		\end{figure}
+
+	\subsection{Selecting and Training Classification Models}
+	\subsection{Evaluating and Comparing Model Performance}
+	\subsection{Result Discussion}
+
+	\section{Multi-Class Task}
+		\subsection{Cleaning Data and Feature Extraction}
+			Similarly to binary task, no cleaning or feature extraction was required.
+
+		\subsection{Data Analysis and Visualization}
 
 			Similarly, fig.\ref{fig:multi} shows different colour reflectance intensities for five different colours. Similar observation can be seen here too. However, due to larger number of colour classes some seem to overlap slightly. 
 
@@ -56,13 +85,46 @@
 				\caption{Input feature visualization for multi-class task. Five colour predicting features are indicated by corresponding colour.}
 				\label{fig:multi}
 			\end{figure}
+		\subsection{Preparing Inputs and Choosing Features}
+		\begin{figure}[H]
+				\includegraphics[width=1\textwidth]{png/multi_one}
+				\caption{One feature accuracy scores for multi-class classification.}
+				\label{fig:multi_one}
+		\end{figure}
 
-	\section{Preparing Inputs and Choosing Features}
-	\section{Selecting and Training Classification Models}
-	\section{Evaluating and Comparing Model Performance}
-	\section{Result Discussion}
+		\begin{center}
+		  	\begin{table}
+		  	\centering
+			\begin{tabular}[b]{|c | l | c|}
+				 \hline
+				 No & Feature Indexes 	  						    & Accuracy \\ 
+				 \hline
+				 1 & 421 											& 0.810 \\ 
+				 2 & 421, 429 										& 0.851 \\ 
+				 3 & 421, 429, 250 									& 0.997 \\ 
+				 4 & 421, 429, 250, 251 							& 0.997 \\ 
+				 5 & 421, 429, 250, 251, 86 						& 1.0 	\\ 
+				 6 & 421, 429, 250, 251, 86, 586 					& 1.0 	\\ 
+				 7 & 421, 429, 250, 251, 86, 586, 88 				& 1.0 	\\ 
+				 8 & 421, 429, 250, 251, 86, 586, 88, 66 			& 1.0 	\\ 
+				 9 & 421, 429, 250, 251, 86, 584, 88, 66, 586 		& 1.0 	\\ 
+				 10 & 421, 429, 250, 251, 86, 584, 88, 66, 586, 914 & 1.0 	\\ 
+				 \hline
+			\end{tabular}
+			\caption{My caption}
+			\label{tbl:accuracy_table}
+			\end{table}
+		\end{center}
 
-
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.5\textwidth]{png/ref_multi}
+			\caption{Accuracy depending on number of features extracted by REF.}
+			\label{fig:ref_multi}
+		\end{figure}
+		\subsection{Selecting and Training Classification Models}
+		\subsection{Evaluating and Comparing Model Performance}
+		\subsection{Result Discussion}
 	\section{Conclusion}
 	
 \end{document}  
