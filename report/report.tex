@@ -1,5 +1,5 @@
 \documentclass[11pt]{article}  
-\usepackage[left=3cm, right=3cm, bottom=3cm]{geometry}           	
+\usepackage[left=3.5cm, right=3.5cm, bottom=3cm]{geometry}           
 \usepackage[parfill]{parskip}    		
 \usepackage{graphicx}
 \usepackage{cleveref}
@@ -12,11 +12,9 @@
 \usepackage[font=footnotesize,labelfont=bf]{caption}
 \usepackage{float}
 \usepackage[font=scriptsize]{caption}
-% \usepackage{subfigure}
 \usepackage[T1]{fontenc}
 \usepackage[font=small,labelfont=bf,tableposition=top]{caption}
-\DeclareCaptionLabelFormat{andtable}{#1~#2  \&  \tablename~\thetable}
-
+% \DeclareCaptionLabelFormat{andtable}{#1~#2  \&  \tablename~\thetable}
 
 \title{CS5014 - Machine Learning 
 \\ \vspace{5mm} \Large P2 - Classification of object colour 
@@ -30,20 +28,23 @@
 	\maketitle
 
 	\section{Overview}
+
 		The objectives of this practical were to come up with classification model for binary and multi-class classification problems. This submission investigates both binary and multi-class tasks. The solution python scripts can be found in \textit{/binaryML/} and \textit{/multiclassML/} directories. Corresponding predicted class files are also in these directories.
 
 		As later sections suggest, the amount of features it takes to determine the class for each task is very low. This is hypothesized based on input analysis and later machine learning observations support these hypotheses. 
 
 	\section{Binary Classification Task}
 
-	\subsection{Cleaning Data and Feature Extraction}
+	\subsection{Cleaning data and Feature extraction}
+
 		As the very first step input data were split into training and testing data with 70-to-30 ratio. The analysis were first done on the training set. Sklearn's \textit{train\_test\_split} was used to do so. Also, a seed was used to ensure the same samples are used every time python notebook is fully executed.
 
 		From observations and further analysis in python, data cleaning was not necessary. Data contains negative and positive values that according to the practical specification make sense. 
 
 		However, a functionality to remove all records with null values in was implemented to ensure that the samples are fully prepared.
 
-	\subsection{Data Analysis and Visualization}
+	\subsection{Data analysis and Visualization}
+
 		To visualize training data X it was plotted with provided wavelength data that contains information about each feature wave length. Additionally, Y training set was used to indicate visually how colours are distributed and can be distinguished. This gave insights as to which features are likely to be good indicators for predicting the colour. 
 
 		\begin{figure}[H]
@@ -54,11 +55,11 @@
 
 		Fig.\ref{fig:binary} shows that there is a clear distinction between red and green colours in terms of features. From the same figure it can be said that feature values between 420 and 450 wavelengths are more or less shared between both, red and green colours. Around 600 wavelength both colour features overlap. Similarly, towards the final features similar observations can be made. The graph insights suggest that overlapping features are not great for determining the class because a feature value can be shared by both colours therefore reducing possibility of determining the right colour. However, a single feature that is around 530 or 650 should be good enough to determine the class. From fig.\ref{fig:binary} it is clear that intensity at those wavelengths are distinct to each colour.
 
-		The hypothesis therefore is that any feature that distinguishes the two colours at particular wavelength will be good enough to determine the class. According to the fig.\ref{fig:binary} there are many of these features: at wavelengths 500-to-580 and 610-to-720. Therefore, it one feature should be enough to determine the class. 
+		The hypothesis therefore is that any feature that distinguishes the two colours at particular wavelength will be good enough to determine the class. According to the fig.\ref{fig:binary} there are many of these features: at wavelengths 500-to-580 and 610-to-720. Therefore, it one feature should be enough to determine the class.
 
-	\subsection{Preparing Inputs and Choosing Features}
-		To choose an appropriate feature an experiment was conducted. Since a single feature could possibly determine a class a training set was 
+	\subsection{Preparing inputs and Choosing features}
 
+		To choose an appropriate feature an experiment was conducted. A single feature could possibly determine a class therefore a training was done using every single feature separately to determine which one is the most accurate. Fig.\ref{fig:binary_one} shows the results. Y axis represents accuracy score and X axis represents a single feature 0-to-920. 
 
 		\begin{figure}[H]
 			\includegraphics[width=1\textwidth]{png/binary_one}
@@ -66,9 +67,40 @@
 			\label{fig:binary_one}
 		\end{figure}
 
-	\subsection{Selecting and Training Classification Models}
-	\subsection{Evaluating and Comparing Model Performance}
-	\subsection{Result Discussion}
+		Pink areas cover features that perform very well. It can be seen that features indexed 200-470 and 490 to almost the end of 900 perform with 100\% accuracy. Therefore, any feature that falls in between these boundaries will perform very well. From fig.\ref{fig:}
+
+		From the graphs, large number samples also should not be necessary because there are no noticeable outliers. 
+
+	\subsection{Selecting and Training classification model}
+		\subsubsection{Linear logistic regression}
+			For binary classification task a simple linear logistic regression model was chosen from sklearn. As expected, the accuracy score is 1.0 with training data. Similar observations are made by using other features too. 
+
+			Once might think that this is caused by over-fitting however from the feature analysis the results make sense. Therefore, scaling which is normally incorporated when over-fitting is suspected was not applied in this situation. 
+
+	\subsection{Evaluating model performance}
+		\subsubsection{Linear logistic regression}
+			For evaluating performance  
+
+			Tbl.\ref{tbl:binary_test_table} shows results when running the model on test set using four different features. The accuracy score is 100\% in each case as expected. Form the results, it can be said that model works very well on test data when testing on four different occasions, each with different feature: 300, 400, 600 or 700.
+			\begin{center}
+		  	\begin{table}
+		  	\centering
+			\begin{tabular}[b]{|c | c|}
+				 \hline
+				 Feature Index 	 & Accuracy \\ 
+ 				 \hline
+				 300 				& 1.0 	\\ 
+				 400 				& 1.0 	\\ 
+				 600		 		& 1.0 	\\ 
+				 700				& 1.0 	\\ 
+				 \hline
+			\end{tabular}
+			\caption{Accuracy score when testing linear logistic regression model on testing set.}
+			\label{tbl:binary_test_table}
+			\end{table}
+		\end{center}
+	\subsection{Result discussion}
+		Results seem to be in according to the observations and hypothesis made during data investigation and visualization steps. 
 
 	\section{Multi-Class Task}
 		\subsection{Cleaning Data and Feature Extraction}
