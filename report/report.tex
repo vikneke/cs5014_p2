@@ -1,11 +1,10 @@
 \documentclass[11pt]{article}  
-\usepackage[left=3.5cm, right=3.5cm, bottom=3cm]{geometry}           
+\usepackage[left=3.5cm, right=3.5cm, bottom=3cm]{geometry}     
 \usepackage[parfill]{parskip}    		
 \usepackage{graphicx}
 \usepackage{cleveref}
 \usepackage[export]{adjustbox}
 \usepackage{mathabx}
-\usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{url}						
 \renewcommand{\baselinestretch}{1}
@@ -14,13 +13,6 @@
 \usepackage[font=scriptsize]{caption}
 \usepackage[T1]{fontenc}
 \usepackage[font=small,labelfont=bf,tableposition=top]{caption}
-% \DeclareCaptionLabelFormat{andtable}{#1~#2  \&  \tablename~\thetable}
-% \usepackage{caption}
-% \usepackage{subcaption}
-
-% \captionsetup{compatibility=false}
-
-
 
 \title{CS5014 - Machine Learning 
 \\ \vspace{5mm} \Large P2 - Classification of object colour 
@@ -90,7 +82,7 @@
 			For evaluating performance  
 
 			Tbl.\ref{tbl:binary_test_table} shows results when running the model on test set using four different features. The accuracy score is 100\% in each case as expected. Form the results, it can be said that model works very well on test data when testing on four different occasions, each with different feature: 300, 400, 600 or 700.
-			\begin{center}
+		\begin{center}
 		  	\begin{table}
 		  	\centering
 			\begin{tabular}[b]{|c | c|}
@@ -107,6 +99,8 @@
 			\label{tbl:binary_test_table}
 			\end{table}
 		\end{center}
+		\vspace*{-1.5cm}
+
 	\subsection{Result discussion}
 		Results seem to be in according to the observations and hypothesis made during data investigation and visualization steps. 
 
@@ -145,7 +139,7 @@
 				\label{fig:multi_one}
 			\end{figure}
 
-			Just like in binary task, in order to investigate single feature performance logistic regression model was trained on every feature separately. Fig.\ref{fig:multi_one} demonstrates the results. From the graph it can be seen that some features perform better than other. As per previous input analysis, best accuracy feature are 300-to-400, providing $>$85\% accuracy on training set however not reaching 100\%. Logistic regression model performance is clearly not as great as in binary task. However, still very good. To investigate further and see whether different input combinations provide better accuracy results recursive feature elimination (RFE) algorithm was used form sklearn. The idea behind this selection algorithm is to choose the best features by considering lesser number of them. The result is mask of true and false values that can be used to choose the best feature. 
+			Just like in binary task, in order to investigate single feature performance logistic regression model was trained on every feature separately. Fig.\ref{fig:multi_one} demonstrates the results. From the graph it can be seen that some features perform better than other. As per previous input analysis, best accuracy feature are 300-to-400, providing $>$85\% accuracy on training set however not reaching 100\%. Logistic regression model performance is clearly not as great as in binary task. However, still very good. To investigate further and see whether different input combinations provide better accuracy results recursive feature elimination (RFE) algorithm was used form sklearn. The idea behind this selection algorithm is to choose the best features by considering lesser number of them. Starting from the full input set the predictor recursively tries smaller subsets of inputs \cite{rfe}. The result is mask of true and false values that can be used to choose the best feature. 
 
 			For RFE experiment 1-to-10 features were chosen and accuracy scores for each selection were recorded in table .\ref{tbl:accuracy_table}.
 
@@ -172,18 +166,67 @@
 			\label{tbl:accuracy_table}
 			\end{table}
 		\end{center}
+		\vspace*{-1.5cm}
 
-		This table shows how many features is the optimal number for maintaining good accuracy score. With feature 421 accuracy score is 0.81 which is already very good. As the number of features is increased the accuracy score also becomes even higher. Three features - 421, 429 and 250 are enough to achieve almost 100\% accuracy. Later, as the number of features is more than four the accuracy score is stable and is 1.0.
+		This table shows how many features is the optimal number for maintaining good accuracy score. With feature 421 accuracy score is 0.81 which is already very good. As the number of features is increased the accuracy score also becomes higher. Three features - 421, 429 and 250 are enough to achieve almost 100\% accuracy. Later, as the number of features is more than four the accuracy score is stable and is 1.0.
 
-		Interestingly, the RFE did not choose 350 feature although as the previous experiment suggests it provides over 0.9 accuracy score on its own. 
+		Interestingly, the RFE did not choose 350 feature although as the previous experiment suggests it provides over 0.9 accuracy score on its own. This might be because RFE chooses features by eliminating a subset of features - large subset of features means better accuracy however elimination does not diverge to a single optimal feature. 
 
-		\begin{figure}[h]
-			\centering
-			\includegraphics[width=0.5\textwidth]{png/ref_multi}
-			\caption{Accuracy depending on number of features extracted by REF.}
-			\label{fig:ref_multi}
-		\end{figure}
+		After analysis, a subset of three features was chosen: 421, 429 and 250. This subset resulted in 0.997 accuracy.
+
 		\subsection{Selecting and Training Classification Models}
+			\subsubsection{Linear logistic regression model}
+ 			 	When using linear regression model with the three features accuracy of 0.997 is achieved on training set. Table \ref{tbl:ligistic_results_multi} encapsulates 
+
+			\begin{center}
+			  	\begin{table}[h]
+			  	\centering
+				\begin{tabular}[b]{| c | c | c | c | c |}
+					\hline
+					Class & Precision &  Recall & F1-score & Support  \\
+		 			\hline
+					  0   &    1.00   &   1.00   &   1.00    &    72 \\
+			          1   &    0.98   &   1.00   &   0.99    &    65 \\
+			          2   &    1.00   &   0.98   &   0.99    &    60 \\
+			          3   &    1.00   &   1.00   &   1.00    &    52 \\
+			          4   &    1.00   &   1.00   &   1.00    &    66 \\
+		  			\hline
+					  avg / total   &    1.00   &   1.00   &   1.00   &    315 \\
+					\hline
+				\end{tabular}
+				\caption{Logistic regression report results.}
+				\label{tbl:logistic_resuts_multi}
+				\end{table}
+			\end{center}
+			\vspace*{-1.5cm}
+
+			\subsubsection{Linear vector support classifier}
+ 			 Accuracy  1.0.
+
+			\begin{center}
+			  	\begin{table}[h]
+			  	\centering
+				\begin{tabular}[b]{| c | c | c | c | c |}
+					\hline
+					Class & Precision &  Recall & F1-score & Support  \\
+		 			\hline
+					0  &   1.00   &   1.00   &   1.00   &   72 \\
+          			1  &   1.00   &   1.00   &   1.00   &    65 \\
+         			2  &   1.00   &   1.00   &   1.00   &     60 \\
+          			3  &   1.00   &   1.00   &   1.00   &     52 \\
+          			4  &   1.00   &   1.00   &   1.00   &     66 \\
+          			\hline
+					avg / total   &   1.00   &   1.00   &   1.00  &      315 \\
+					\hline
+				\end{tabular}
+				\caption{Linear support vector classifier report results.}
+				\label{tbl:vector_resuts_multi}
+				\end{table}
+			\end{center}
+			\vspace*{-1.5cm}
+
+
+
 		\subsection{Evaluating and Comparing Model Performance}
 		\subsection{Result Discussion}
 	\section{Conclusion}
@@ -220,4 +263,16 @@
 		\end{center}
 		\subsection{Multi-class task results}
 
+
+
+
+	\clearpage
+
+	\begin{thebibliography}{9}
+
+		\bibitem{rfe} 
+		Sklearn RFE [Accessed 21/04/2018]
+		\\\texttt{http://scikit-learn.org/stable/modules/generated/sklearn.feature\_selection.RFE.html}
+
+	\end{thebibliography}
 \end{document}  
