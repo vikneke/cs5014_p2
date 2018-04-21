@@ -234,7 +234,7 @@
 
 			From the two models chosen support vector classifier performs slightly better therefore is chosen for testing on test data set. The three same input features are used.
 
-			The results of the model performance are recorded in table \ref{tbl:vector_resuts_multi_testing}. The same observations can be made as with training data. The chosen futures and the VSC seems to provide 1.0 accuracy. The results tell that all of the test samples were classified correctly. Due to used cross validation and input observations this is not likely to be caused by over-fitting. 
+			The results of the model performance are recorded in table \ref{tbl:vector_resuts_multi_testing}. The same observations can be made as with training data. The chosen futures and the VSC seems to provide 1.0 accuracy. The results tell that all of the test samples were classified correctly. Due to used cross validation and input observations this is not likely to be caused by over-fitting. The data provided seems to be excellent for classifying especially when extracting the right features which was achieved successfully using the RFE approach.  
 
 			\begin{center}
 			  	\begin{table}[h]
@@ -259,9 +259,9 @@
 			\vspace*{-1.3cm}
 
 		\subsection{Result discussion}
-			One might think that the results are too good to be true and perhaps over-fitting has occurred. However, from the input inspection this should not be the case - the data provided seems to be excellent for classifying especially when extracting the right features which was achieved successfully using the RFE approach. 
+			I first considered applying scaling techniques but the final models performed very well on the test data too. Therefore, this step was skipped. Also, data is already to some extend scaled the values are in range from -150 to 150. However, I do understand that it is good practice in general to apply scaling and normalization techniques. I believe in this case it is not necessary. 
 
-			It was first considered to apply scaling techniques but the final models performs very well on the test data too. Therefore, this step was skipped. Also, data is already to some extend scaled the values are in range from -150 to 150. However, I do understand that it is good practice in general to apply scaling and normalization techniques. I believe in this case it is not necessary. 
+			From the results both logistic regression and VSC are good for the multi-class classification task. 
 
 	\section{Conclusion}
 		This practical submission contains two python notebooks: one for each task. As per practical specification, appendices section of this report contains two tables for each of the task final predictions for \textit{XToClassify}. Directories \textit{/binaryTask/} and \textit{/multiClassTask/} contain files with the same results. 
@@ -270,7 +270,7 @@
 
 		Because of good results I did not explore more models. The two simple logistic and VSC models were well-suited for these two tasks. 
 
-		From the data observation the models should perform well on a very small training sample too e.g, five samples - one for each of the class for multi-class task and two for binary classification. If had more time, this I believe could be proved too. 
+		From the data observations the models should perform well on a very small training sample too e.g, five samples - one for each of the class for multi-class task and two for binary classification. If had more time, this I believe could be proved too. 
 	\clearpage
 	\appendix
 	\section{Appendices}
