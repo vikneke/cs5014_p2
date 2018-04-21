@@ -198,7 +198,7 @@
 					 & avg / total   &    1.00   &   1.00   &   1.00   &    315 \\
 					\hline
 				\end{tabular}
-				\caption{Logistic regression report results.}
+				\caption{Logistic regression report results on training data.}
 				\label{tbl:logistic_resuts_multi}
 				\end{table}
 			\end{center}
@@ -208,6 +208,7 @@
 				To experiment further, a linear vector support classifier was applied on the same three features. Accuracy of 1.0 was achieved. This is slightly better than the logistic regression model results. 
 
 				From the table \ref{tbl:vector_resuts_multi} it can be observed that the averages are just like in logistic regression model. However, vector support model seems to perform better with colours pink and green achieving 1.0 in precision and recall. 
+			
 			\begin{center}
 			  	\begin{table}[h]
 			  	\centering
@@ -224,7 +225,7 @@
 					 & avg / total   &   1.00   &   1.00   &   1.00  &      315 \\
 					\hline
 				\end{tabular}
-				\caption{Linear support vector classifier report results.}
+				\caption{Linear support vector classifier report results on training data.}
 				\label{tbl:vector_resuts_multi}
 				\end{table}
 			\end{center}
@@ -232,10 +233,47 @@
 
  			 The results table tells that there are more blue colour samples in the training set that any other colour. Red has the smallest number of samples.  
 
-		\subsection{Evaluating and Comparing Model Performance}
-		\subsection{Result Discussion}
-	\section{Conclusion}
+		\subsection{Evaluating model performance on testing set}
 
+			From the two models chosen support vector classifier performs slightly better therefore is chosen for testing on test data set. The three same inputs are used.
+
+			The results of the model performance are recorded in table \ref{tbl:vector_resuts_multi_testing}. The same observations can be made as with training data. The chosen futures and the VSC seems to provide 1.0 accuracy. The results tell that all of the test samples were classified correctly. Due to used cross validation and input observations this is not likely to be caused by over-fitting. 
+
+			\begin{center}
+			  	\begin{table}[h]
+			  	\centering
+				\begin{tabular}[b]{| l | c | c | c | c | c |}
+					\hline
+					Class & Class No & Precision &  Recall & F1-score & Support  \\
+		 			\hline
+					Blue  & 0  &   1.00   &   1.00   &   1.00   &   18 \\
+          			Green & 1  &   1.00   &   1.00   &   1.00   &   25 \\
+         			Pink  & 2  &   1.00   &   1.00   &   1.00   &   30 \\
+          			Red  & 3  &   1.00   &   1.00   &   1.00   &   38 \\
+          			Yellow & 4  &   1.00   &   1.00   &   1.00   &  24 \\
+          			\hline
+					 & avg / total   &   1.00   &   1.00   &   1.00  &  135 \\
+					\hline
+				\end{tabular}
+				\caption{Linear support vector classifier report results on test data.}
+				\label{tbl:vector_resuts_multi_testing}
+				\end{table}
+			\end{center}
+			\vspace*{-1.3cm}
+
+		\subsection{Result Discussion}
+			One might think that the results are too good to be true and perhaps over-fitting has occurred. However, from the input inspection this should not be the case - the data provided seems to be excellent for classifying especially when extracting the right features which was achieved successfully using the RFE approach. 
+
+			It was first considered to apply scaling techniques but the final models performs very well on the test data too. Therefore, this step was skipped. Also, data is already to some extend scaled the values are in range from -150 to 150. However, I do understand that it is good practice in general to apply scaling and normalization techniques. I believe in this case it is not necessary. 
+
+	\section{Conclusion}
+		This practical submission contains two python notebooks: one for each task. As per practical specification, appendices section of this report contains two tables for each of the task final predictions for \textit{XToClassify}. Directories \textit{/binaryTask/} and \textit{/multiClassTask/} contain files with the same results. 
+
+		Data was clean and ready for machine learning. Overall, this submission investigated data sets through different visualization techniques, then it applied multiple machine learning models and observed and reported results using common classification measures in results tables. From binary and multi-class classification results both models perform very well. Due to previously stated facts this is not likely to be due to over-fitting. 
+
+		Because of good results I did not explore more models. The two simple logistic and VSC models were well-suited for these two tasks. 
+
+		From the data observation the models should perform well on a very small training sample too e.g, five samples - one for each of the class for multi-class task and two for binary classification. If had more time, this I believe could be proved too. 
 	\clearpage
 	\appendix
 	\section{Appendices}
@@ -315,11 +353,6 @@
 			\label{tbl:final_binary}
 			\end{table}
 		\end{center}
-
- 
- 
-
-
 	\clearpage
 
 	\begin{thebibliography}{9}
