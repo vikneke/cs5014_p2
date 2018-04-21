@@ -166,7 +166,7 @@
 			\label{tbl:accuracy_table}
 			\end{table}
 		\end{center}
-		\vspace*{-1.5cm}
+		\vspace*{-1.3cm}
 
 		This table shows how many features is the optimal number for maintaining good accuracy score. With feature 421 accuracy score is 0.81 which is already very good. As the number of features is increased the accuracy score also becomes higher. Three features - 421, 429 and 250 are enough to achieve almost 100\% accuracy. Later, as the number of features is more than four the accuracy score is stable and is 1.0.
 
@@ -176,56 +176,61 @@
 
 		\subsection{Selecting and Training Classification Models}
 			\subsubsection{Linear logistic regression model}
- 			 	When using linear regression model with the three features accuracy of 0.997 is achieved on training set. Table \ref{tbl:ligistic_results_multi} encapsulates 
+ 			 	When using linear regression model with the three features accuracy of 0.997 is achieved on training set. Table \ref{tbl:ligistic_results_multi} holds classification report results. Each class has a precision, recall, f1-score and support measures. 
+
+ 			 	It can be seen that only green and pink have precision or recall other than 1.0. Precision indicates what part of positive classifications were actually correct whereas recall what part of actual positives were identified correctly. F-1 score is a weighted average of both precision and recall. Support identifies the number of actual classifications for particular class.
+
+ 			 	From the totals it can be said that the linear logistic regression model seems to be a very good model for this particular problem. 
 
 			\begin{center}
 			  	\begin{table}[h]
 			  	\centering
-				\begin{tabular}[b]{| c | c | c | c | c |}
+				\begin{tabular}[b]{| l | c | c | c | c | c |}
 					\hline
-					Class & Precision &  Recall & F1-score & Support  \\
+					Class & Class No & Precision &  Recall & F1-score & Support  \\
 		 			\hline
-					  0   &    1.00   &   1.00   &   1.00    &    72 \\
-			          1   &    0.98   &   1.00   &   0.99    &    65 \\
-			          2   &    1.00   &   0.98   &   0.99    &    60 \\
-			          3   &    1.00   &   1.00   &   1.00    &    52 \\
-			          4   &    1.00   &   1.00   &   1.00    &    66 \\
+					  Blue  &  0  &    1.00   &   1.00   &   1.00    &    72 \\
+			          Green &  1  &    0.98   &   1.00   &   0.99    &    65 \\
+			          Pink  &  2   &    1.00   &   0.98   &   0.99    &    60 \\
+			          Red  &   3   &    1.00   &   1.00   &   1.00    &    52 \\
+			          Yellow & 4   &    1.00   &   1.00   &   1.00    &    66 \\
 		  			\hline
-					  avg / total   &    1.00   &   1.00   &   1.00   &    315 \\
+					 & avg / total   &    1.00   &   1.00   &   1.00   &    315 \\
 					\hline
 				\end{tabular}
 				\caption{Logistic regression report results.}
 				\label{tbl:logistic_resuts_multi}
 				\end{table}
 			\end{center}
-			\vspace*{-1.5cm}
+			\vspace*{-1.3cm}
 
 			\subsubsection{Linear vector support classifier}
- 			 Accuracy  1.0.
+				To experiment further, a linear vector support classifier was applied on the same three features. Accuracy of 1.0 was achieved. This is slightly better than the logistic regression model results. 
 
+				From the table \ref{tbl:vector_resuts_multi} it can be observed that the averages are just like in logistic regression model. However, vector support model seems to perform better with colours pink and green achieving 1.0 in precision and recall. 
 			\begin{center}
 			  	\begin{table}[h]
 			  	\centering
-				\begin{tabular}[b]{| c | c | c | c | c |}
+				\begin{tabular}[b]{| l | c | c | c | c | c |}
 					\hline
-					Class & Precision &  Recall & F1-score & Support  \\
+					Class & Class No & Precision &  Recall & F1-score & Support  \\
 		 			\hline
-					0  &   1.00   &   1.00   &   1.00   &   72 \\
-          			1  &   1.00   &   1.00   &   1.00   &    65 \\
-         			2  &   1.00   &   1.00   &   1.00   &     60 \\
-          			3  &   1.00   &   1.00   &   1.00   &     52 \\
-          			4  &   1.00   &   1.00   &   1.00   &     66 \\
+					Blue & 0  &   1.00   &   1.00   &   1.00   &   72 \\
+          			Green & 1  &   1.00   &   1.00   &   1.00   &    65 \\
+         			Pink & 2  &   1.00   &   1.00   &   1.00   &     60 \\
+          			Red & 3  &   1.00   &   1.00   &   1.00   &     52 \\
+          			Yellow & 4  &   1.00   &   1.00   &   1.00   &     66 \\
           			\hline
-					avg / total   &   1.00   &   1.00   &   1.00  &      315 \\
+					 & avg / total   &   1.00   &   1.00   &   1.00  &      315 \\
 					\hline
 				\end{tabular}
 				\caption{Linear support vector classifier report results.}
 				\label{tbl:vector_resuts_multi}
 				\end{table}
 			\end{center}
-			\vspace*{-1.5cm}
+			\vspace*{-1.3cm}
 
-
+ 			 The results table tells that there are more blue colour samples in the training set that any other colour. Red has the smallest number of samples.  
 
 		\subsection{Evaluating and Comparing Model Performance}
 		\subsection{Result Discussion}
@@ -261,9 +266,58 @@
 			\label{tbl:final_binary}
 			\end{table}
 		\end{center}
+
+
 		\subsection{Multi-class task results}
 
 
+		\begin{center}
+		  	\begin{table}[h]
+		  		\small
+
+		  	\centering
+			\begin{tabular}[b]{| c | c|} 
+				\hline
+				No & Class \\
+				\hline
+				1 & 2 \\ 2 & 0 \\ 3 & 2 \\ 4 & 0 \\ 5 & 0 \\ 6 & 0 \\ 7 & 2 \\ 8 & 0 \\ 9 & 4 \\ 10 & 1\\ 
+				\hline
+			\end{tabular}
+			\begin{tabular}[b]{| c | c|} 
+				\hline
+				No & Class \\
+				\hline
+				 11 & 4 \\ 12 & 3 \\ 13 &  3 \\ 14 &  2\\ 15 &  0\\ 16 & 4\\ 17 & 2\\ 18 &  4 \\ 19 &  3\\20 & 3 \\ 
+				\hline
+			\end{tabular}
+			\begin{tabular}[b]{| c | c|} 
+				\hline
+				No & Class \\
+				\hline
+				 21 & 4 \\ 22 &  1 \\ 23 & 2 \\ 24 & 1 \\ 25 & 4 \\ 26 & 2 \\ 27 & 3 \\ 28 & 2 \\ 29 & 0 \\ 30 & 1 \\ 
+				\hline
+			\end{tabular}
+			\begin{tabular}[b]{| c | c|} 
+				\hline
+				No & Class \\
+				\hline
+				 31 & 1 \\ 32 & 1 \\ 33 & 3 \\ 34 & 1 \\ 35 & 2 \\ 36 & 4 \\ 37 & 2 \\ 38 & 3 \\ 39 & 1 \\ 40 & 4 \\
+				\hline
+			\end{tabular}
+			\begin{tabular}[b]{| c | c|} 
+				\hline
+				No & Class \\
+				\hline
+				 41 & 0 \\ 42 & 0 \\ 43 & 1 \\ 44 & 1 \\ 45 & 3 \\ 46 & 0 \\ 47 & 3 \\ 48 & 4 \\ 49 & 3 \\ 50 & 4 \\
+				\hline
+			\end{tabular}
+			\caption{Binary task result for \textit{XToClassify}.}
+			\label{tbl:final_binary}
+			\end{table}
+		\end{center}
+
+ 
+ 
 
 
 	\clearpage
