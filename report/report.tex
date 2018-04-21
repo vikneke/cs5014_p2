@@ -15,6 +15,12 @@
 \usepackage[T1]{fontenc}
 \usepackage[font=small,labelfont=bf,tableposition=top]{caption}
 % \DeclareCaptionLabelFormat{andtable}{#1~#2  \&  \tablename~\thetable}
+% \usepackage{caption}
+% \usepackage{subcaption}
+
+% \captionsetup{compatibility=false}
+
+
 
 \title{CS5014 - Machine Learning 
 \\ \vspace{5mm} \Large P2 - Classification of object colour 
@@ -110,24 +116,41 @@
 
 		\subsection{Data Analysis and Visualization}
 
-			Similarly, fig.\ref{fig:multi} shows different colour reflectance intensities for five different colours. Similar observation can be seen here too. However, due to larger number of colour classes some seem to overlap slightly. 
-
-			From fig.\ref{fig:multi} it can be seen that red and pink colour intensities over different wavelengths are very similar. Green and blue are also similar. Yellow on the other hand is very distinct. Just from looking at the graph it can be seen that there are not many features that 
-
 			\begin{figure}[H]
 				\includegraphics[width=1\textwidth]{png/multi_default}
 				\caption{Input feature visualization for multi-class task. Five colour predicting features are indicated by corresponding colour.}
 				\label{fig:multi}
 			\end{figure}
+
+			Fig.\ref{fig:multi} shows different colour reflectance intensities for five different colours. Green and red just like in binary task are distinct and the same patterns can be recognized in multi-class task. However, due to larger number of colour classes some seem to overlap slightly. From fig.\ref{fig:multi} it can be seen that red and pink colour intensities over different wavelengths are very similar. Yellow on the other hand has very distinct reflectance measures. Just from looking at the graph first two hundred features do not distinct different colours. Blue and green seem to have similar reflectance towards the end. Pink, yellow and red also share similar patterns. 
+
+			From the same graph it can also be seen that some features distinct colours well. For instance, feature indexed 420 is likely to perform well. Since there are almost no overlapping feature values for any of the colours. 
+
+			For instance, when feature 400 is selected histogram in fig.\ref{fig:400_900} shows that the samples are clearly distinctly distributed. WHereas, feature 900 in fig.\ref{fig:400_900} shows that green and blue overlap slightly, red pink and yellow follow the pattern. This also suggest that red and green will be  most likely to be mixed. Pink, red and yellow mixed together too. 
+
+		\begin{figure}
+			\hfill
+				\includegraphics[width=0.4\textwidth]{png/400_multi.png}
+			\hfill
+				\includegraphics[width=0.4\textwidth]{png/900_multi.png}
+			\hfill
+			\label{fig:400_900}
+			\caption{On the left - feature 400, on the right - feature 900.}
+		\end{figure}
+
 		\subsection{Preparing Inputs and Choosing Features}
-		\begin{figure}[H]
+			\begin{figure}[H]
 				\includegraphics[width=1\textwidth]{png/multi_one}
 				\caption{One feature accuracy scores for multi-class classification.}
 				\label{fig:multi_one}
-		\end{figure}
+			\end{figure}
+
+			Just like in binary task, in order to investigate single feature performance logistic regression model was trained on every feature separately. Fig.\ref{fig:multi_one} demonstrates the results. From the graph it can be seen that some features perform better than other. As per previous input analysis, best accuracy feature are 300-to-400, providing $>$85\% accuracy on training set however not reaching 100\%. Logistic regression model performance is clearly not as great as in binary task. However, still very good. To investigate further and see whether different input combinations provide better accuracy results recursive feature elimination (RFE) algorithm was used form sklearn. The idea behind this selection algorithm is to choose the best features by considering lesser number of them. The result is mask of true and false values that can be used to choose the best feature. 
+
+			For RFE experiment 1-to-10 features were chosen and accuracy scores for each selection were recorded in table .\ref{tbl:accuracy_table}.
 
 		\begin{center}
-		  	\begin{table}
+		  	\begin{table}[h]
 		  	\centering
 			\begin{tabular}[b]{|c | l | c|}
 				 \hline
@@ -145,10 +168,14 @@
 				 10 & 421, 429, 250, 251, 86, 584, 88, 66, 586, 914 & 1.0 	\\ 
 				 \hline
 			\end{tabular}
-			\caption{My caption}
+			\caption{Accuracy table for different features. }
 			\label{tbl:accuracy_table}
 			\end{table}
 		\end{center}
+
+		This table shows how many features is the optimal number for maintaining good accuracy score. With feature 421 accuracy score is 0.81 which is already very good. As the number of features is increased the accuracy score also becomes even higher. Three features - 421, 429 and 250 are enough to achieve almost 100\% accuracy. Later, as the number of features is more than four the accuracy score is stable and is 1.0.
+
+		Interestingly, the RFE did not choose 350 feature although as the previous experiment suggests it provides over 0.9 accuracy score on its own. 
 
 		\begin{figure}[h]
 			\centering
