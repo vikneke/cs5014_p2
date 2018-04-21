@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.1)  21 APR 2018 19:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.3.1)  21 APR 2018 21:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -447,85 +447,78 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<png/binary_default.png, id=13, 1754.555pt x 601.24625pt>
+<png/binary_default.png, id=12, 1754.555pt x 601.24625pt>
 File: png/binary_default.png Graphic file (type png)
 
 <use png/binary_default.png>
-Package pdftex.def Info: png/binary_default.png used on input line 51.
+Package pdftex.def Info: png/binary_default.png used on input line 50.
 (pdftex.def)             Requested size: 415.12572pt x 142.24701pt.
+ [2
 
-<png/binary_one.png, id=15, 1740.5025pt x 600.2425pt>
+ <./png/binary_default.png>]
+<png/binary_one.png, id=21, 1740.5025pt x 600.2425pt>
 File: png/binary_one.png Graphic file (type png)
  <use png/binary_one.png>
-Package pdftex.def Info: png/binary_one.png used on input line 65.
+Package pdftex.def Info: png/binary_one.png used on input line 64.
 (pdftex.def)             Requested size: 415.12572pt x 143.16356pt.
 
-[2 <./png/binary_default.png>]
-
-LaTeX Warning: Reference `fig:' on page 3 undefined on input line 70.
-
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 88.
 [3 <./png/binary_one.png>]
-<png/multi_default.png, id=27, 1754.555pt x 600.2425pt>
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 85.
+ [4]
+<png/multi_default.png, id=30, 1754.555pt x 600.2425pt>
 File: png/multi_default.png Graphic file (type png)
 
 <use png/multi_default.png>
-Package pdftex.def Info: png/multi_default.png used on input line 114.
+Package pdftex.def Info: png/multi_default.png used on input line 112.
 (pdftex.def)             Requested size: 415.12572pt x 142.00954pt.
- [4 <./png/multi_default.png>]
 
-Package caption Warning: \label without proper reference on input line 131.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:400_900' on page 5 undefined on input line 123.
-
-
-Package caption Warning: \label without proper reference on input line 131.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:400_900' on page 5 undefined on input line 123.
-
-<png/400_multi.png, id=32, 614.295pt x 597.23125pt>
+<png/400_multi.png, id=31, 614.295pt x 597.23125pt>
 File: png/400_multi.png Graphic file (type png)
  <use png/400_multi.png>
-Package pdftex.def Info: png/400_multi.png used on input line 127.
+Package pdftex.def Info: png/400_multi.png used on input line 125.
 (pdftex.def)             Requested size: 166.04774pt x 161.43684pt.
 
-<png/900_multi.png, id=33, 614.295pt x 597.23125pt>
+<png/900_multi.png, id=32, 614.295pt x 597.23125pt>
 File: png/900_multi.png Graphic file (type png)
  <use png/900_multi.png>
-Package pdftex.def Info: png/900_multi.png used on input line 129.
+Package pdftex.def Info: png/900_multi.png used on input line 127.
 (pdftex.def)             Requested size: 166.04774pt x 161.43684pt.
 
-<png/multi_one.png, id=34, 1740.5025pt x 600.2425pt>
+<png/multi_one.png, id=33, 1740.5025pt x 600.2425pt>
 File: png/multi_one.png Graphic file (type png)
  <use png/multi_one.png>
-Package pdftex.def Info: png/multi_one.png used on input line 137.
+Package pdftex.def Info: png/multi_one.png used on input line 135.
 (pdftex.def)             Requested size: 415.12572pt x 143.16356pt.
 
-[5 <./png/400_multi.png> <./png/900_multi.png> <./png/multi_one.png>]
+[5
 
-LaTeX Warning: Reference `tbl:ligistic_results_multi' on page 6 undefined on in
-put line 179.
+ <./png/multi_default.png>]
 
-[6] [7] [8] [9]
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6 <./png/400_multi.png> <./png/900_multi.png> <./png/multi_one.png>]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[7]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[8] [9]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 288.
+(Font)              <7> on input line 285.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 288.
+(Font)              <5> on input line 285.
  [10
 
 ]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 362.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 359.
 
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Overfull \hbox (71.4902pt too wide) in paragraph at lines 361--363
+Overfull \hbox (71.4902pt too wide) in paragraph at lines 358--360
 \T1/cmtt/m/n/10.95 http://scikit-learn.org/stable/modules/generated/sklearn.fea
 ture_selection.RFE.html 
  []
@@ -534,20 +527,17 @@ ture_selection.RFE.html
 
 ] (./report.aux)
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 6436 strings out of 493014
- 106427 string characters out of 6133352
+ 6434 strings out of 493014
+ 106393 string characters out of 6133352
  180090 words of memory out of 5000000
- 9870 multiletter control sequences out of 15000+600000
+ 9868 multiletter control sequences out of 15000+600000
  23247 words of font info for 59 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 53i,7n,92p,1078b,518s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,7n,92p,1142b,518s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 </usr/local/texlive/2016/texmf-dist/fonts/type1/public/mathabx-type1/matha10.pf
 b></usr/local/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb>
@@ -562,7 +552,7 @@ xlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/local/texl
 ive/2016/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/local/texliv
 e/2016/texmf-dist/fonts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/
 2016/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on report.pdf (11 pages, 777801 bytes).
+Output written on report.pdf (11 pages, 778544 bytes).
 PDF statistics:
  106 PDF objects out of 1000 (max. 8388607)
  67 compressed objects within 1 object stream

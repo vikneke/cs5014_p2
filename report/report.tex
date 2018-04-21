@@ -26,93 +26,91 @@
 	\maketitle
 
 	\section{Overview}
-
 		The objectives of this practical were to come up with classification model for binary and multi-class classification problems. This submission investigates both binary and multi-class tasks. The solution python scripts can be found in \textit{/binaryML/} and \textit{/multiclassML/} directories. 
 
-		As later sections suggest, the amount of features it takes to determine the class for each task is very low. This is hypothesized based on input analysis and later machine learning observations support these hypotheses. 
+		As later sections suggest, the number of features it takes to determine the class for each task is very low. This is hypothesized based on input analysis and later machine learning observations support these hypotheses. 
 
 		Final predicted class files are recorded in the appendices section of this report and in directories \textit{/binaryTask/} and \textit{/multiClassTask/}.
+	
+	\clearpage
+	\section{Binary classification task}
 
-	\section{Binary Classification Task}
+		\subsection{Cleaning data and Feature extraction}
+			As the very first step input data was split into training and testing data with 70-to-30 ratio. The analysis were first done on the training set. Sklearn's \textit{train\_test\_split} was used to do so. Also, a seed was used to ensure the same samples are used every time python notebook is fully executed.
 
-	\subsection{Cleaning data and Feature extraction}
+			From observations and further analysis in python, data cleaning was not necessary. Data contains negative and positive values that according to the practical specification make sense. 
 
-		As the very first step input data were split into training and testing data with 70-to-30 ratio. The analysis were first done on the training set. Sklearn's \textit{train\_test\_split} was used to do so. Also, a seed was used to ensure the same samples are used every time python notebook is fully executed.
+			However, a functionality to remove all records with null values was implemented to ensure that the samples are fully prepared.
 
-		From observations and further analysis in python, data cleaning was not necessary. Data contains negative and positive values that according to the practical specification make sense. 
+		\subsection{Data analysis and Visualization}
 
-		However, a functionality to remove all records with null values in was implemented to ensure that the samples are fully prepared.
+			To visualize training data X, each of the features was plotted in fig.\ref{fig:binary}. Additionally, Y training set was used to indicate visually how colours are distributed and can be distinguished. This gave insights as to which features are likely to be good indicators for predicting the class. x axis is the index of the feature - each feature is for different wavelength. 
 
-	\subsection{Data analysis and Visualization}
+			\begin{figure}[H]
+				\includegraphics[width=1\textwidth]{png/binary_default}
+				\caption{Input feature visualization for binary classification task. Red and green predicting samples are indicated by colour.}
+				\label{fig:binary}
+			\end{figure}
 
-		To visualize training data X it was plotted with provided wavelength data that contains information about each feature wave length. Additionally, Y training set was used to indicate visually how colours are distributed and can be distinguished. This gave insights as to which features are likely to be good indicators for predicting the colour. 
+			Fig.\ref{fig:binary} shows that there is a clear distinction between red and green colours in terms of sample values provided in the training set. From the same figure it can be said that feature values between 0 and 100 are more or less shared between both, red and green colours. Around 470 both colour feature values overlap. Similarly, towards the final features similar observations can be made. The graph insights suggest that overlapping features are not great for determining the class because a feature value can be shared by both colours therefore reducing possibility of determining the right colour. However, a single feature that is around 300 or 650 should be good enough to determine the class. From fig.\ref{fig:binary} it is clear that intensity at those wavelengths are distinct to each colour.
 
-		\begin{figure}[H]
-			\includegraphics[width=1\textwidth]{png/binary_default}
-			\caption{Input feature visualization for binary classification task. Red and green predicting features are indicated by colour.}
-			\label{fig:binary}
-		\end{figure}
+			The hypothesis therefore is that any feature that distinguishes the two colours at particular wavelength will be good enough to determine the class. According to the fig.\ref{fig:binary} there are many of these features: at wavelengths in features 200-to-420 and 520-to-800. Therefore, one feature should be enough to determine the class.
 
-		Fig.\ref{fig:binary} shows that there is a clear distinction between red and green colours in terms of features. From the same figure it can be said that feature values between 420 and 450 wavelengths are more or less shared between both, red and green colours. Around 600 wavelength both colour features overlap. Similarly, towards the final features similar observations can be made. The graph insights suggest that overlapping features are not great for determining the class because a feature value can be shared by both colours therefore reducing possibility of determining the right colour. However, a single feature that is around 530 or 650 should be good enough to determine the class. From fig.\ref{fig:binary} it is clear that intensity at those wavelengths are distinct to each colour.
+		\subsection{Preparing inputs and Choosing features}
 
-		The hypothesis therefore is that any feature that distinguishes the two colours at particular wavelength will be good enough to determine the class. According to the fig.\ref{fig:binary} there are many of these features: at wavelengths 500-to-580 and 610-to-720. Therefore, it one feature should be enough to determine the class.
+			To choose an appropriate feature an experiment was conducted. A single feature could possibly determine a class therefore a training was done using every single feature separately to determine which one is the most accurate. Fig.\ref{fig:binary_one} shows the results. Y axis represents accuracy score and X axis represents a single feature 0-to-920. 
 
-	\subsection{Preparing inputs and Choosing features}
+			\begin{figure}[H]
+				\includegraphics[width=1\textwidth]{png/binary_one}
+				\caption{One feature accuracy scores for binary classification task.}
+				\label{fig:binary_one}
+			\end{figure}
+			Pink areas cover features that perform very well. It can be seen that features indexed 200-470 and 490 to almost the end of 900 perform with 100\% accuracy. Therefore, any feature that falls in between these boundaries will perform very well. The results graph very well fits the original feature graph in fig.\ref{fig:binary} and shows that most feature values are far away for both classes apart from beginning and middle. From the graphs, large number samples also should not be necessary because there are no noticeable outliers. 
 
-		To choose an appropriate feature an experiment was conducted. A single feature could possibly determine a class therefore a training was done using every single feature separately to determine which one is the most accurate. Fig.\ref{fig:binary_one} shows the results. Y axis represents accuracy score and X axis represents a single feature 0-to-920. 
+		\subsection{Selecting and Training classification model}
+			\subsubsection{Linear logistic regression}
+				For binary classification task a simple linear logistic regression model was chosen from sklearn. As expected, the accuracy score is 1.0 when testing with training data only. Similar observations are made by using multiple other features as shown before. This was achieved in the experiment described before. The 1.0 accuracy also means that precision and recall also 1.0 - all classes were predicted correctly. 
 
-		\begin{figure}[H]
-			\includegraphics[width=1\textwidth]{png/binary_one}
-			\caption{One feature accuracy scores for binary classification.}
-			\label{fig:binary_one}
-		\end{figure}
+				Once might think that this is caused by over-fitting however from the feature analysis the results make sense. Therefore, scaling which is normally incorporated when over-fitting is suspected was not applied in this situation. 
 
-		Pink areas cover features that perform very well. It can be seen that features indexed 200-470 and 490 to almost the end of 900 perform with 100\% accuracy. Therefore, any feature that falls in between these boundaries will perform very well. From fig.\ref{fig:}
+				Since a simple linear logistic regression models seemed to work well no other models were investigated.
 
-		From the graphs, large number samples also should not be necessary because there are no noticeable outliers. 
+		\subsection{Evaluating model performance}
+			\subsubsection{Linear logistic regression}
+				Tbl.\ref{tbl:binary_test_table} shows results when running the model on test set using four different features. The accuracy score is 100\% in each case as expected. Form the results, it can be said that model works very well on test data when testing during four different occasions, each with different feature: 300, 400, 600 or 700 - shown in table \ref{tbl:binary_test_table}.
+			
+			\begin{center}
+			  	\begin{table}[h]
+			  	\centering
+				\begin{tabular}[b]{|c | c|}
+					 \hline
+					 Feature Index 	 & Accuracy \\ 
+	 				 \hline
+					 300 				& 1.0 	\\ 
+					 400 				& 1.0 	\\ 
+					 600		 		& 1.0 	\\ 
+					 700				& 1.0 	\\ 
+					 \hline
+				\end{tabular}
+				\caption{Accuracy score when testing linear logistic regression model on testing set.}
+				\label{tbl:binary_test_table}
+				\end{table}
+			\end{center}
+			\vspace*{-1.5cm}
 
-	\subsection{Selecting and Training classification model}
-		\subsubsection{Linear logistic regression}
-			For binary classification task a simple linear logistic regression model was chosen from sklearn. As expected, the accuracy score is 1.0 with training data. Similar observations are made by using other features too. 
+		\subsection{Result discussion}
+			Results seem to be in according to the observations and hypothesis made during data investigation and visualization steps. The results suggest that both object colours can be distinguished accurately by using a single feature on certain wavelength.
 
-			Once might think that this is caused by over-fitting however from the feature analysis the results make sense. Therefore, scaling which is normally incorporated when over-fitting is suspected was not applied in this situation. 
+			\clearpage
+	\section{Multi-class task}
+		\subsection{Cleaning data and Feature extraction}
+			Similarly to binary task, no cleaning or feature extraction was necessary. Null value function was applied on this data set too however no samples were matched. Mean, minimum and maximum values seem to be reasonable considering the features. 
 
-	\subsection{Evaluating model performance}
-		\subsubsection{Linear logistic regression}
-			For evaluating performance  
-
-			Tbl.\ref{tbl:binary_test_table} shows results when running the model on test set using four different features. The accuracy score is 100\% in each case as expected. Form the results, it can be said that model works very well on test data when testing on four different occasions, each with different feature: 300, 400, 600 or 700.
-		\begin{center}
-		  	\begin{table}
-		  	\centering
-			\begin{tabular}[b]{|c | c|}
-				 \hline
-				 Feature Index 	 & Accuracy \\ 
- 				 \hline
-				 300 				& 1.0 	\\ 
-				 400 				& 1.0 	\\ 
-				 600		 		& 1.0 	\\ 
-				 700				& 1.0 	\\ 
-				 \hline
-			\end{tabular}
-			\caption{Accuracy score when testing linear logistic regression model on testing set.}
-			\label{tbl:binary_test_table}
-			\end{table}
-		\end{center}
-		\vspace*{-1.5cm}
-
-	\subsection{Result discussion}
-		Results seem to be in according to the observations and hypothesis made during data investigation and visualization steps. 
-
-	\section{Multi-Class Task}
-		\subsection{Cleaning Data and Feature Extraction}
-			Similarly to binary task, no cleaning or feature extraction was necessary.
-
-		\subsection{Data Analysis and Visualization}
+		\subsection{Data analysis and Visualization}
 
 			\begin{figure}[H]
 				\includegraphics[width=1\textwidth]{png/multi_default}
-				\caption{Input feature visualization for multi-class task. Five colour predicting features are indicated by corresponding colour.}
+				\caption{Input feature visualization for multi-class task. Five colour predicting samples are indicated by corresponding colour.}
 				\label{fig:multi}
 			\end{figure}
 
@@ -120,7 +118,7 @@
 
 			From the same graph it can also be seen that some features distinct colours well. For instance, feature indexed 420 is likely to perform well. Since there are almost no overlapping feature values for any of the colours. 
 
-			For instance, when feature 400 is selected histogram in fig.\ref{fig:400_900} shows that the samples are clearly distinctly distributed. WHereas, feature 900 in fig.\ref{fig:400_900} shows that green and blue overlap slightly, red pink and yellow follow the pattern. This also suggest that red and green will be  most likely to be mixed. Pink, red and yellow mixed together too. 
+			For instance, when feature 400 is selected histogram in fig.\ref{fig:400_900} shows that the sample values are clearly distinctly distributed. Whereas feature 900 in fig.\ref{fig:400_900} shows that green and blue overlap, red pink and yellow follow the pattern. This and the original graph also suggest that blue and green will be most likely to be mixed. Pink, red and yellow mixed together too. 
 
 		\begin{figure}
 			\hfill
@@ -128,27 +126,27 @@
 			\hfill
 				\includegraphics[width=0.4\textwidth]{png/900_multi.png}
 			\hfill
-			\label{fig:400_900}
 			\caption{On the left - feature 400, on the right - feature 900.}
+			\label{fig:400_900}
 		\end{figure}
 
-		\subsection{Preparing Inputs and Choosing Features}
+		\subsection{Preparing inputs and Choosing features}
 			\begin{figure}[H]
 				\includegraphics[width=1\textwidth]{png/multi_one}
 				\caption{One feature accuracy scores for multi-class classification.}
 				\label{fig:multi_one}
 			\end{figure}
 
-			Just like in binary task, in order to investigate single feature performance logistic regression model was trained on every feature separately. Fig.\ref{fig:multi_one} demonstrates the results. From the graph it can be seen that some features perform better than other. As per previous input analysis, best accuracy feature are 300-to-400, providing $>$85\% accuracy on training set however not reaching 100\%. Logistic regression model performance is clearly not as great as in binary task. However, still very good. To investigate further and see whether different input combinations provide better accuracy results recursive feature elimination (RFE) algorithm was used form sklearn. The idea behind this selection algorithm is to choose the best features by considering lesser number of them. Starting from the full input set the predictor recursively tries smaller subsets of inputs \cite{rfe}. The result is mask of true and false values that can be used to choose the best feature. 
+			Just like in binary task, in order to investigate single feature performance logistic regression model was trained on every feature separately. Fig.\ref{fig:multi_one} demonstrates the results. From the graph it can be seen that some features perform better than others. As per previous input analysis, best accuracy features are 300-to-400, providing $>$85\% accuracy on training set however not reaching 100\%. In particular, feature 350 provides over 0.9 accuracy score. Logistic regression model performance is clearly not as great as in binary task. However, still very good. To investigate further and see whether different input combinations provide better accuracy results recursive feature elimination (RFE) algorithm was used from sklearn. The idea behind this selection algorithm is to choose the best features by considering lesser number of them. Starting from the full input set the predictor recursively tries smaller subsets of inputs \cite{rfe}. The result is mask of true and false values that can be used to choose the best features. 
 
-			For RFE experiment 1-to-10 features were chosen and accuracy scores for each selection were recorded in table .\ref{tbl:accuracy_table}.
+			For RFE experiment 1-to-10 features were chosen and accuracy scores for each selection were recorded in table \ref{tbl:accuracy_table} below.
 
 		\begin{center}
 		  	\begin{table}[h]
 		  	\centering
 			\begin{tabular}[b]{|c | l | c|}
 				 \hline
-				 No & Feature Indexes 	  						    & Accuracy \\ 
+				 No & Feature indexes 	  						    & Accuracy \\ 
 				 \hline
 				 1 & 421 											& 0.810 \\ 
 				 2 & 421, 429 										& 0.851 \\ 
@@ -168,15 +166,15 @@
 		\end{center}
 		\vspace*{-1.3cm}
 
-		This table shows how many features is the optimal number for maintaining good accuracy score. With feature 421 accuracy score is 0.81 which is already very good. As the number of features is increased the accuracy score also becomes higher. Three features - 421, 429 and 250 are enough to achieve almost 100\% accuracy. Later, as the number of features is more than four the accuracy score is stable and is 1.0.
+		This table shows how many features is the optimal number for maintaining good accuracy score. With feature 421 accuracy score is 0.81 which is already very good. As the number of features is increased the accuracy score also becomes higher. Three features - 421, 429 and 250 are enough to achieve almost 1.0 accuracy. Later, as the number of features is more than four the accuracy score is stable and is 1.0.
 
 		Interestingly, the RFE did not choose 350 feature although as the previous experiment suggests it provides over 0.9 accuracy score on its own. This might be because RFE chooses features by eliminating a subset of features - large subset of features means better accuracy however elimination does not diverge to a single optimal feature. 
 
-		After analysis, a subset of three features was chosen: 421, 429 and 250. This subset resulted in 0.997 accuracy.
+		After analysis, a subset of three features was chosen: 421, 429 and 250. This subset resulted in 0.997 accuracy on training set when experimenting.
 
-		\subsection{Selecting and Training Classification Models}
+		\subsection{Selecting and Training classification models}
 			\subsubsection{Linear logistic regression model}
- 			 	When using linear regression model with the three features accuracy of 0.997 is achieved on training set. Table \ref{tbl:ligistic_results_multi} holds classification report results. Each class has a precision, recall, f1-score and support measures. 
+ 			 	When using linear regression model with the three features accuracy of 0.997 is achieved on training set. Table \ref{tbl:logistic_resuts_multi} holds classification report results. Each class has a precision, recall, f1-score and support measures. 
 
  			 	It can be seen that only green and pink have precision or recall other than 1.0. Precision indicates what part of positive classifications were actually correct whereas recall what part of actual positives were identified correctly. F-1 score is a weighted average of both precision and recall. Support identifies the number of actual classifications for particular class.
 
@@ -203,7 +201,6 @@
 				\end{table}
 			\end{center}
 			\vspace*{-1.3cm}
-
 			\subsubsection{Linear vector support classifier}
 				To experiment further, a linear vector support classifier was applied on the same three features. Accuracy of 1.0 was achieved. This is slightly better than the logistic regression model results. 
 
@@ -231,11 +228,11 @@
 			\end{center}
 			\vspace*{-1.3cm}
 
- 			 The results table tells that there are more blue colour samples in the training set that any other colour. Red has the smallest number of samples.  
+ 			 The results table tells that there are more blue colour samples in the training set than any other colour. Red has the smallest number of samples. This would normally indicate that the model could possibly perform better when classifying certain classes however in this case this does not apply.
 
 		\subsection{Evaluating model performance on testing set}
 
-			From the two models chosen support vector classifier performs slightly better therefore is chosen for testing on test data set. The three same inputs are used.
+			From the two models chosen support vector classifier performs slightly better therefore is chosen for testing on test data set. The three same input features are used.
 
 			The results of the model performance are recorded in table \ref{tbl:vector_resuts_multi_testing}. The same observations can be made as with training data. The chosen futures and the VSC seems to provide 1.0 accuracy. The results tell that all of the test samples were classified correctly. Due to used cross validation and input observations this is not likely to be caused by over-fitting. 
 
@@ -261,7 +258,7 @@
 			\end{center}
 			\vspace*{-1.3cm}
 
-		\subsection{Result Discussion}
+		\subsection{Result discussion}
 			One might think that the results are too good to be true and perhaps over-fitting has occurred. However, from the input inspection this should not be the case - the data provided seems to be excellent for classifying especially when extracting the right features which was achieved successfully using the RFE approach. 
 
 			It was first considered to apply scaling techniques but the final models performs very well on the test data too. Therefore, this step was skipped. Also, data is already to some extend scaled the values are in range from -150 to 150. However, I do understand that it is good practice in general to apply scaling and normalization techniques. I believe in this case it is not necessary. 
